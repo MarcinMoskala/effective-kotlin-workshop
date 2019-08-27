@@ -13,7 +13,7 @@ data class UserRepository(
 
     operator fun contains(user: User) = user in users
 
-    fun changeUserSurname(user: User, newSurname: String) {
+    fun changeUserSurname(user: User, newSurname: String?) {
         users.first { it.name == user.name && it.surname == user.surname }.surname = newSurname
     }
 
@@ -36,8 +36,9 @@ data class UserRepository(
 }
 
 data class User(
-    var surname: String,
-    var name: String
+    var id: Int?,
+    var surname: String?,
+    var name: String?
 )
 
 interface BonusesService {

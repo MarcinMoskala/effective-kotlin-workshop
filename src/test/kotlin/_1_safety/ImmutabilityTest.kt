@@ -25,8 +25,8 @@ class ImmutabilityTest {
         val user1withSurnameChanged = user1withSurnameChanged.copy() // We need it because User is mutable
         val repo = UserRepository()
         repo.addUser(user1.copy())
-        repo.addUser(User("BBB", "AAA"))
-        repo.addUser(User("CCC", "DDD"))
+        repo.addUser(User(0, "BBB", "AAA"))
+        repo.addUser(User(1, "CCC", "DDD"))
         assert(user1.copy() in repo)
         assertNotEquals(user1, user1withSurnameChanged, "Values should be different, actual $user1 and $user1withSurnameChanged")
         assertNotEquals(user1.hashCode(), user1withSurnameChanged.hashCode(), "Values should be different, actual $user1 and $user1withSurnameChanged")

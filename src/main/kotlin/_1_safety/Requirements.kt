@@ -2,9 +2,7 @@ package _1_safety
 
 import java.lang.Error
 
-class UserDto(val name: String?, val surname: String?, val id: String?)
-
-fun Notifier.notifyUser(user: UserDto?) {
+fun Notifier.notifyUser(user: User?) {
     TODO()
 }
 
@@ -13,13 +11,13 @@ class IdIsRequired: Error()
 class Notifier(initialized: Boolean = false) {
     var initialized = initialized
         private set
-    var usersNotified = setOf<String>()
+    var usersNotified = setOf<Int>()
 
     fun initialize() {
         initialized = true
     }
 
-    fun notifyPerson(id: String) {
+    fun notifyPerson(id: Int) {
         usersNotified = usersNotified + id
     }
 }

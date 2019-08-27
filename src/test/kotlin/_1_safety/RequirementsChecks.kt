@@ -9,8 +9,8 @@ class RequirementsChecks {
     @Test
     fun `Function sends message for correct arguments and state`() {
         val notifier = Notifier(initialized = true)
-        val id = "123"
-        notifier.notifyUser(UserDto("Ben", "Barack", id))
+        val id = 123
+        notifier.notifyUser(User(id, "Ben", "Barack"))
         assertEquals(setOf(id), notifier.usersNotified)
     }
 
@@ -26,28 +26,28 @@ class RequirementsChecks {
     fun `Function throws IllegalArgumentException when name is null`() {
         val notifier = Notifier(initialized = true)
         val id = "123"
-        assertThrows<IllegalArgumentException> { notifier.notifyUser(UserDto(null, "Barack", id)) }
+        assertThrows<IllegalArgumentException> { notifier.notifyUser(User(null, "Barack", id)) }
     }
 
     @Test
     fun `Function throws IllegalArgumentException when surname is null`() {
         val notifier = Notifier(initialized = true)
-        val id = "123"
-        assertThrows<IllegalArgumentException> { notifier.notifyUser(UserDto("Mike", null, id)) }
+        val id = 123
+        assertThrows<IllegalArgumentException> { notifier.notifyUser(User(id, "Mike", null)) }
     }
 
     @Test
     fun `Function throws IllegalStateException when notifier is not initialized`() {
         val notifier = Notifier(initialized = false)
-        val id = "123"
-        assertThrows<IllegalStateException> { notifier.notifyUser(UserDto("Mike", "Bull", id)) }
+        val id = 123
+        assertThrows<IllegalStateException> { notifier.notifyUser(User(id, "Mike", "Bull")) }
     }
 
     @Test
     fun `Function throws IdIdRequired when is is null`() {
         val notifier = Notifier()
-        val id = null
-        assertThrows<IdIsRequired> { notifier.notifyUser(UserDto("Mike", "Bull", id)) }
+        val id: Int? = null
+        assertThrows<IdIsRequired> { notifier.notifyUser(User(id, "Mike", "Bull")) }
     }
 
     inline fun <reified T> assertThrows(function: ()->Unit) {
