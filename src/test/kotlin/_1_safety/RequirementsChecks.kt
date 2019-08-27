@@ -45,7 +45,7 @@ class RequirementsChecks {
     }
 
     @Test
-    fun `Function throws IncorrectId id is incorrect`() {
+    fun `Function throws IncorrectId when id is incorrect`() {
         val notifier = FakeNotifier(initialized = true)
         assertThrows<IncorrectId> { notifier.notifyUser(User(INCORRECT_ID, "Mike", "Bull")) }
     }
