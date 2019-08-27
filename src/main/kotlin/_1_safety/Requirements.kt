@@ -6,18 +6,11 @@ fun Notifier.notifyUser(user: User?) {
     TODO()
 }
 
-class IdIsRequired: Error()
+class IncorrectId: Error()
 
-class Notifier(initialized: Boolean = false) {
-    var initialized = initialized
-        private set
-    var usersNotified = setOf<Int>()
-
-    fun initialize() {
-        initialized = true
-    }
-
-    fun notifyPerson(id: Int) {
-        usersNotified = usersNotified + id
-    }
+interface Notifier {
+    val initialized: Boolean
+    fun initialize()
+    fun notifyPerson(id: Int)
+    fun checkId(id: Int): Boolean
 }

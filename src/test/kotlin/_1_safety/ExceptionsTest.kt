@@ -12,7 +12,7 @@ class ExceptionsTest {
     @Test
     fun `changeUserSurname when user cannot be found, proper error is displayed`() {
         val repo = UserRepository()
-        val exception = assertThrows<IllegalAccessException> { repo.changeUserSurname(user1, "XXX") }
+        val exception = assertThrows<IllegalAccessException> { repo.changeUserSurname(123, "XXX") }
         assertEquals("No such user in the repository", exception.message, "Function has correct message")
     }
 
@@ -44,7 +44,7 @@ class ExceptionsTest {
         // Works for correct user
         val user = User(10, "A", "B")
         repo.addUser(user)
-        assertEquals(user, method.call(repo, user.id!!))
+        assertEquals(user, method.call(repo, user.id))
 
         // Throws a correct error for lack of user with given id
         val exception = assertThrows<InvocationTargetException> { // All errors should be wrapped into this type by reflection
@@ -82,7 +82,7 @@ class ExceptionsTest {
         // Works for correct user
         val user = User(10, "A", "B")
         repo.addUser(user)
-        assertEquals(user, method.call(repo, user.id!!))
+        assertEquals(user, method.call(repo, user.id))
 
         // Returns a null lack of user with given id
         val result = method.call(repo, 0)
@@ -119,7 +119,7 @@ class ExceptionsTest {
         // Works for correct user
         val user = User(10, "A", "B")
         repo.addUser(user)
-        assertEquals(user, method.call(repo, user.id!!, default))
+        assertEquals(user, method.call(repo, user.id, default))
 
         // Returns a null lack of user with given id
         val result = method.call(repo, 0, default)

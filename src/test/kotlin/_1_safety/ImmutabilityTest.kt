@@ -31,7 +31,7 @@ class ImmutabilityTest {
         assertNotEquals(user1, user1withSurnameChanged, "Values should be different, actual $user1 and $user1withSurnameChanged")
         assertNotEquals(user1.hashCode(), user1withSurnameChanged.hashCode(), "Values should be different, actual $user1 and $user1withSurnameChanged")
 
-        repo.changeUserSurname(user1.copy(), user1withSurnameChanged.surname)
+        repo.changeUserSurname(user1.id, user1withSurnameChanged.surname)
         assert(user1withSurnameChanged in repo) { "No user $user1withSurnameChanged in the repository $repo" }
     }
 
@@ -88,7 +88,7 @@ class ImmutabilityTest {
         val repo = UserRepository()
         repo.addUser(user1)
         repo.addBonus(user1, bonus1)
-        repo.changeUserSurname(user1, user1withSurnameChanged.surname)
+        repo.changeUserSurname(user1.id, user1withSurnameChanged.surname)
         assert(user1withSurnameChanged in repo) { "Name change does not work correctly" }
         assert(bonus1 in repo.bonusesOf(user1withSurnameChanged)) {
             "Bonus is not preserved through surname change"
