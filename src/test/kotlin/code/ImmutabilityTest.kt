@@ -1,7 +1,5 @@
-package _1_safety
+package code
 
-import org.junit.jupiter.api.AfterEach
-import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import kotlin.reflect.KMutableProperty
 import kotlin.reflect.KProperty

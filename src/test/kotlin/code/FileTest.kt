@@ -1,4 +1,4 @@
-package _1_safety
+package code
 
 import org.junit.jupiter.api.Test
 import java.io.File

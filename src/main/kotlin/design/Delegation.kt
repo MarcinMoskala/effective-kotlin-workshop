@@ -1,5 +1,4 @@
-import kotlin.properties.ReadWriteProperty
-import kotlin.reflect.KProperty
+package design
 
 // TODO: Implement PreferenceReaderBinder and uncomment the rest
 
@@ -52,14 +51,14 @@ object FakePreferences {
 //    }
 //
 //    @Test
-//    fun `Storage and reading both use FakePreferences`() {
+//    fun `Storage and reading both use design.FakePreferences`() {
 //        val test1 = "Test"
 //        val test2 = "Test2"
 //
 //        Preferences.token = test1
-//        assertEquals(test1, FakePreferences.preferences["UserPreferences" to "token"])
+//        assertEquals(test1, design.FakePreferences.preferences["UserPreferences" to "token"])
 //
-//        FakePreferences.preferences += ("UserPreferences" to "token") to test2
+//        design.FakePreferences.preferences += ("UserPreferences" to "token") to test2
 //        assertEquals(test2, Preferences.token)
 //    }
 //}

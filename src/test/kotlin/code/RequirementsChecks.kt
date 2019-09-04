@@ -1,12 +1,10 @@
-package _1_safety
+package code
 
-import _1_safety.RequirementsChecks.FakeNotifier.Companion.INCORRECT_ID
+import code.RequirementsChecks.FakeNotifier.Companion.INCORRECT_ID
 import org.junit.Test
 import org.junit.jupiter.api.assertThrows
 import java.lang.AssertionError
 import kotlin.test.assertEquals
-import kotlin.test.assertNotNull
-import kotlin.test.assertTrue
 
 class RequirementsChecks {
     @Test

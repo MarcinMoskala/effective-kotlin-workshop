@@ -1,4 +1,4 @@
-package _1_safety
+package code
 
 // This repo is incomplete and full of errors. Improve it
 data class UserRepository(
@@ -6,6 +6,9 @@ data class UserRepository(
     private val bonuses: MutableMap<User, MutableList<String>> = mutableMapOf(),
     private val bonusesService: BonusesService = PrintingBonusesService
 ) {
+
+    operator fun UserRepository.get(id: Int): User =
+        users.first { it.id == id }
 
     fun addUser(user: User) {
         users += user

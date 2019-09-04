@@ -1,4 +1,4 @@
-package _1_safety
+package code
 
 import java.lang.Error
 
