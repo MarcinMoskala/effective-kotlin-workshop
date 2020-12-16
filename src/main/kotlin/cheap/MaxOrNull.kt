@@ -4,13 +4,13 @@ import kotlin.random.Random
 import kotlin.system.measureTimeMillis
 
 fun Iterable<Int>.maxOrNullOld(): Int? {
-   var max: Int? = null
-   for (i in this) {
-       if(i > max ?: Int.MIN_VALUE) {
-           max = i
-       }
-   }
-   return max
+    var max: Int? = null
+    for (i in this) {
+        if (i > max ?: Int.MIN_VALUE) {
+            max = i
+        }
+    }
+    return max
 }
 
 fun Iterable<Int>.maxOrNull(): Int? {
