@@ -1,7 +1,7 @@
 package code
 
 import code.RequirementsChecks.FakeNotifier.Companion.INCORRECT_ID
-import org.junit.Test
+import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import java.lang.AssertionError
 import kotlin.test.assertEquals
