@@ -7,17 +7,11 @@ data class Product(val name: String, val price: Double)
 data class City(val name: String)
 
 // Ger customers who paid `amount`
-fun Shop.getCustomersWhoPaidAtLeast(amount: Double): List<Customer> = this
-	.customers
-	.filter { it.orders.sumByDouble { it.products.sumByDouble { it.price } } > amount }
+fun Shop.getCustomersWhoPaidAtLeast(amount: Double): List<Customer> = TODO()
 
 // Get customers with undelivered products
-fun Shop.getCustomersWithUndeliveredProducts(): List<Customer> = this
-	.customers
-	.filter { it.orders.any { !it.isDelivered } }
+fun Shop.getCustomersWithUndeliveredProducts(): List<Customer> = TODO()
 
 // Return the number of times the given product was ordered.
 // Note: a customer may order the same product for several times.
-fun Shop.getNumberOfTimesProductWasOrdered(product: Product): Int = this
-	.customers
-    .sumBy { it.orders.sumBy { it.products.count { it == product } } }
+fun Shop.getNumberOfTimesProductWasOrdered(product: Product): Int = TODO()
