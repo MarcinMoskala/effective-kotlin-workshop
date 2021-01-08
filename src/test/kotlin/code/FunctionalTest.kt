@@ -1,77 +1,44 @@
 package functional
 
-class FunctionsClassic {
+import org.junit.jupiter.api.Test
+import kotlin.test.assertEquals
 
-    fun add(num1: Int, num2: Int): Int = num1 + num2
+class FunctionalTest {
 
-    fun printNum(num: Int) {
-        print(num)
+    @Test
+    fun testLambdaFunctionalTypeSpecified() {
+        testFunctions(LambdaFunctionalTypeSpecified())
     }
 
-    fun triple(num: Int): Int = num * 3
-
-    fun longestOf(str1: String, str2: String, str3: String): String = listOf(str1, str2, str3)
-        .maxBy { it.length }!!
-}
-
-interface FunctionsFunctional {
-    val add: Any
-    val printNum: Any
-    val triple: Any
-    val longestOf: Any
-}
-
-class AnonymousFunctionalTypeSpecified : FunctionsFunctional {
-    override val add: (Int, Int) -> Int = fun(num1, num2) = num1 + num2
-    override val printNum = TODO()
-    override val triple = TODO()
-    override val longestOf = TODO()
-}
-
-class AnonymousFunctionalTypeInferred : FunctionsFunctional {
-    override val add = fun(num1: Int, num2: Int) = num1 + num2
-    override val printNum = TODO()
-    override val triple = TODO()
-    override val longestOf = TODO()
-}
-
-class LambdaFunctionalTypeSpecified : FunctionsFunctional {
-    override val add: (Int, Int) -> Int = { num1, num2 -> num1 + num2 }
-    override val printNum = TODO()
-    override val triple = TODO()
-    override val longestOf = TODO()
-}
-
-class LambdaFunctionalTypeInferred : FunctionsFunctional {
-    override val add = { num1: Int, num2: Int -> num1 + num2 }
-    override val printNum = TODO()
-    override val triple = TODO()
-    override val longestOf = TODO()
-}
-
-class FunctionReferenceFunctionalTypeInferred : FunctionsFunctional {
-    override val add: (Int, Int) -> Int = ::add
-    override val printNum: (Int) -> Unit = TODO()
-    override val triple: (Int) -> Int = TODO()
-    override val longestOf: (String, String, String) -> String = TODO()
-
-    private fun add(num1: Int, num2: Int): Int = num1 + num2
-
-    private fun printNum(num: Int) {
-        print(num)
+    @Test
+    fun testLambdaFunctionalTypeInferred() {
+        testFunctions(LambdaFunctionalTypeInferred())
     }
 
-    private fun triple(num: Int): Int = num * 3
+    @Test
+    fun testAnonymousFunctionalTypeSpecified() {
+        testFunctions(AnonymousFunctionalTypeSpecified())
+    }
 
-    private fun longestOf(str1: String, str2: String, str3: String): String = listOf(str1, str2, str3)
-        .maxBy { it.length }!!
-}
+    @Test
+    fun testAnonymousFunctionalTypeInferred() {
+        testFunctions(AnonymousFunctionalTypeInferred())
+    }
 
-class BoundedFunctionReferenceFunctionalTypeInferred : FunctionsFunctional {
-    private val classic = FunctionsClassic()
+    @Test
+    fun testFunctionReferenceFunctionalTypeInferred() {
+        testFunctions(FunctionReferenceFunctionalTypeInferred())
+    }
 
-    override val add: (Int, Int) -> Int = classic::add
-    override val printNum: (Int) -> Unit = TODO()
-    override val triple: (Int) -> Int = TODO()
-    override val longestOf: (String, String, String) -> String = TODO()
+    @Test
+    fun testBoundedFunctionReferenceFunctionalTypeInferred() {
+        testFunctions(BoundedFunctionReferenceFunctionalTypeInferred())
+    }
+
+    fun testFunctions(obj: FunctionsFunctional) {
+        assertEquals(3, (obj.add as (Int, Int)->Int)(1, 2))
+        assertEquals(6, (obj.triple as (Int)->Int)(2))
+        assertEquals("BBB", (obj.longestOf as (String, String, String)->String)("AA", "BBB", "CC"))
+        assertEquals("AA", (obj.longestOf as (String, String, String)->String)("AA", "B", "C"))
+    }
 }
