@@ -1,8 +1,9 @@
 package code
 
-import org.junit.Assert.*
+import cheap.mutableLazy
+import org.junit.Assert.assertNull
 import org.junit.jupiter.api.Test
-import kotlin.system.*
+import kotlin.system.measureTimeMillis
 
 class MutableLazyTests {
 
