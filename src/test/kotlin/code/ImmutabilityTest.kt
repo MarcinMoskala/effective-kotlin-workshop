@@ -71,12 +71,13 @@ class ImmutabilityTest {
         }
 
         val repo = UserRepository(bonusesService = service)
+        repo.addUser(user1)
         repo.addBonus(user1, bonus1)
         assertEquals(mapOf(user1 to listOf(bonus1)), lastUpdatedBonuses)
         repo.updateBonus(user1, bonus1, bonus2)
         assertEquals(mapOf(user1 to listOf(bonus2)), lastUpdatedBonuses)
         repo.removeBonus(user1, bonus2)
-        assertEquals(mapOf(), lastUpdatedBonuses)
+        assertEquals(mapOf(user1 to listOf()), lastUpdatedBonuses)
     }
 
     @Test
