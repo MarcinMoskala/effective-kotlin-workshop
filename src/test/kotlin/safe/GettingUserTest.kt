@@ -1,14 +1,14 @@
-package code
+package safe
 
+import creation.User
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
-import safe.BonusRepository
 import java.lang.reflect.InvocationTargetException
 import kotlin.reflect.full.memberFunctions
 import kotlin.reflect.typeOf
 import kotlin.test.*
 
-class ExceptionsTest {
+class GettingUserTest {
 
     @Test
     fun `changeUserSurname when user cannot be found, proper error is displayed`() {

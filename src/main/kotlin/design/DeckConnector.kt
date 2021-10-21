@@ -1,4 +1,4 @@
-package code
+package creation
 
 class DeckConnector(val deckName: String) {
     var state: ConnectionState = Initial()

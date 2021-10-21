@@ -1,10 +1,7 @@
-package code
+package design
 
+import creation.DeckConnector
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.assertThrows
-import java.lang.reflect.InvocationTargetException
-import kotlin.reflect.full.memberFunctions
-import kotlin.reflect.typeOf
 import kotlin.test.*
 
 class DeckConnectorTest {

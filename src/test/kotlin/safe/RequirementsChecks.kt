@@ -1,6 +1,10 @@
-package code
+package safe
 
-import code.RequirementsChecks.FakeNotifier.Companion.INCORRECT_ID
+import creation.IncorrectId
+import creation.Notifier
+import creation.User
+import creation.notifyUser
+import safe.RequirementsChecks.FakeNotifier.Companion.INCORRECT_ID
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import java.lang.AssertionError

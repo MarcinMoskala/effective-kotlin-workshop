@@ -23,7 +23,7 @@ class InMemoryUserRepositoryTest {
 
     @OptIn(ExperimentalStdlibApi::class)
     @Test
-    fun `should not expose mutation point`() {
+    fun `getUsers should not expose mutation point`() {
         assertEquals(typeOf<Set<User>>(), InMemoryUserRepository::getUsers.returnType)
     }
 
@@ -43,7 +43,7 @@ class InMemoryUserRepositoryTest {
     }
 
     @Test
-    fun parallelAddAndRead(): Unit = runBlocking(Dispatchers.IO) {
+    fun `should allow parallel write and read`(): Unit = runBlocking(Dispatchers.IO) {
         repeat(10) {
             launch {
                 repeat(1000) {

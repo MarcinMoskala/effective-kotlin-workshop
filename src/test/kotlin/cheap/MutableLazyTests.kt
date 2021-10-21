@@ -1,6 +1,5 @@
-package code
+package cheap
 
-import cheap.mutableLazy
 import org.junit.jupiter.api.Test
 import kotlin.system.measureTimeMillis
 import kotlin.test.assertNull

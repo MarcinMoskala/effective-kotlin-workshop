@@ -1,4 +1,4 @@
-package code
+package creation
 
 sealed class Consumer<T> {
     abstract fun consume(elem: T)
