@@ -2,11 +2,13 @@ package code
 
 import java.lang.Error
 
+data class User(val id: Int, val name: String?, var surname: String?)
+
 fun Notifier.notifyUser(user: User?) {
     TODO()
 }
 
-class IncorrectId: Error()
+class IncorrectId : Error()
 
 interface Notifier {
 

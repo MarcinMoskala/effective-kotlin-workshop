@@ -16,7 +16,7 @@ fun main() {
 //    val panasonicRadio3: Radio = factory.makePanasonicRadio()
 }
 
-private class SonyRadio(): Radio {
+private class SonyRadio() : Radio {
     override fun start() {
         print("Start Sony radio")
     }
@@ -26,7 +26,7 @@ private class SonyRadio(): Radio {
     }
 }
 
-private class PanasonicRadio: Radio {
+private class PanasonicRadio : Radio {
     override fun start() {
         print("Start Sony radio")
     }

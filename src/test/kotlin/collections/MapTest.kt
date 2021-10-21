@@ -1,7 +1,7 @@
 package collections
 
-import org.junit.*
-import org.junit.Assert.*
+import org.junit.jupiter.api.Test
+import kotlin.test.assertEquals
 
 // TODO: Uncomment it
 //import kotlin.collections.map as stdlibMap

@@ -4,7 +4,7 @@ sealed class Consumer<T> {
     abstract fun consume(elem: T)
 }
 
-class Printer<T>: Consumer<T>() {
+class Printer<T> : Consumer<T>() {
     private var toPrint: T? = null
 
     fun print() {
@@ -16,7 +16,7 @@ class Printer<T>: Consumer<T>() {
     }
 }
 
-class Scanner<T>: Consumer<T>() {
+class Scanner<T> : Consumer<T>() {
     private var toScan: T? = null
 
     fun scan() {
@@ -34,7 +34,7 @@ fun main(args: Array<String>) {
     val consumer = getConsumer()
     consumer.consume(10)
 
-    when(consumer) {
+    when (consumer) {
         is Printer -> consumer.print()
         is Scanner -> consumer.scan()
     }

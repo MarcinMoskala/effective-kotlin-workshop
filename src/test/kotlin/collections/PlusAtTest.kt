@@ -1,8 +1,8 @@
 package collections
 
-import org.junit.Assert.assertTrue
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertTrue
 
 @Suppress("FunctionName")
 class PlusAtTest {

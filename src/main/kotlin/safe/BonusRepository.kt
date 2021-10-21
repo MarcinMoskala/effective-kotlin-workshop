@@ -1,13 +1,15 @@
-package code
+package safe
+
+import safe.BonusRepository.User
 
 // This repo is incomplete and full of errors. Improve it
-data class UserRepository(
+data class BonusRepository(
     private val users: MutableSet<User> = mutableSetOf(),
     private val bonuses: MutableMap<User, MutableList<String>> = mutableMapOf(),
     private val bonusesService: BonusesService = PrintingBonusesService
 ) {
 
-    operator fun UserRepository.get(id: Int): User =
+    operator fun get(id: Int): User =
         users.first { it.id == id }
 
     fun addUser(user: User) {
@@ -36,19 +38,19 @@ data class UserRepository(
     }
 
     fun bonusesOf(user: User) = bonuses[user]!!
-}
 
-data class User(
-    var id: Int,
-    var surname: String?,
-    var name: String?
-)
+    data class User(
+        var id: Int,
+        var surname: String?,
+        var name: String?
+    )
+}
 
 interface BonusesService {
     fun update(bonuses: Map<User, List<String>>)
 }
 
-object PrintingBonusesService: BonusesService {
+object PrintingBonusesService : BonusesService {
     override fun update(bonuses: Map<User, List<String>>) {
         print("Bonuses changed to $bonuses")
     }

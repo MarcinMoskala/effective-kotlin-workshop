@@ -44,7 +44,12 @@ fun main(args: Array<String>) {
     println(names.filter { it.startsWith("M") }) // [Mike, Marcin]
 
     println(names.flatMap { it.toList() }) // [M, i, k, e, J, a, n, e, M, a, r, c, i, n, J, o, h, n, J, a, m, e, s]
-    println(numbers.flatMap { listOf(it, it + 10) }) // [1, 11, 2, 12, 3, 13, 4, 14, 5, 15, 6, 16, 7, 17, 8, 18, 9, 19, 10, 20]
+    println(numbers.flatMap {
+        listOf(
+            it,
+            it + 10
+        )
+    }) // [1, 11, 2, 12, 3, 13, 4, 14, 5, 15, 6, 16, 7, 17, 8, 18, 9, 19, 10, 20]
 
 //    println(names.map { it.toUpperCase() }) // [MIKE, JANE, MARCIN, JOHN, JAMES]
 //    println(numbers.map { it * 10 }) // [10, 20, 30, 40, 50, 60, 70, 80, 90, 100]

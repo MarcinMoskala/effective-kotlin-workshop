@@ -34,7 +34,7 @@ fun List<StudentGrades>.getBestForScholarship(semester: String): List<StudentGra
     val best = mutableListOf<StudentGrades>()
     for (i in 0 until 10) {
         val next = candidates.getOrNull(i)
-        if(next != null) {
+        if (next != null) {
             best.add(next)
         }
     }

@@ -43,9 +43,11 @@ fun main() {
 data class TableBuilder(var trs: List<TrBuilder> = emptyList()) {
     override fun toString(): String = "<table>${trs.joinToString(separator = "")}</table>"
 }
+
 data class TrBuilder(var tds: List<TdBuilder> = emptyList()) {
     override fun toString(): String = "<tr>${tds.joinToString(separator = "")}</tr>"
 }
+
 data class TdBuilder(var text: String = "") {
     override fun toString(): String = "<td>$text</td>"
 }
