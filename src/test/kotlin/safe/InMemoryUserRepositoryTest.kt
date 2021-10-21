@@ -24,7 +24,7 @@ class InMemoryUserRepositoryTest {
     @OptIn(ExperimentalStdlibApi::class)
     @Test
     fun `should not expose mutation point`() {
-        assertEquals(typeOf<List<User>>(), InMemoryUserRepository::getUsers.returnType)
+        assertEquals(typeOf<Set<User>>(), InMemoryUserRepository::getUsers.returnType)
     }
 
     @Test
@@ -44,16 +44,18 @@ class InMemoryUserRepositoryTest {
 
     @Test
     fun parallelAddAndRead(): Unit = runBlocking(Dispatchers.IO) {
-        launch {
-            repeat(1000) {
-                repo.addUser(User(it * 2 + 1, "NewUserName$it", "NewUserSurname$it"))
+        repeat(10) {
+            launch {
+                repeat(1000) {
+                    repo.addUser(User(it * 2 + 1, "NewUserName$it", "NewUserSurname$it"))
+                }
             }
-        }
-        launch {
-            repeat(1000) {
-                val users = repo.getUsers()
-                assertTrue(users.count() > 1000)
-                assertTrue(users.sumOf { it.id } > 500_000)
+            launch {
+                repeat(1000) {
+                    val users = repo.getUsers()
+                    assertTrue(users.count() > 1000)
+                    assertTrue(users.sumOf { it.id } > 500_000)
+                }
             }
         }
     }
