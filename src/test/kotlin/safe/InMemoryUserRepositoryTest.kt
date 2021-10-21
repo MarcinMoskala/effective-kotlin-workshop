@@ -1,5 +1,6 @@
 package safe
 
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import org.junit.jupiter.api.BeforeEach
@@ -42,7 +43,7 @@ class InMemoryUserRepositoryTest {
     }
 
     @Test
-    fun parallelAddAndRead(): Unit = runBlocking {
+    fun parallelAddAndRead(): Unit = runBlocking(Dispatchers.IO) {
         launch {
             repeat(1000) {
                 repo.addUser(User(it * 2 + 1, "NewUserName$it", "NewUserSurname$it"))
