@@ -1,12 +1,9 @@
 package creation
 
 class DeckConnector(val deckName: String) {
-    var state: ConnectionState = Initial()
+    var state: ConnectionState = ConnectionState.Initial
 
     // ...
 
-    sealed class ConnectionState
-    class Initial : ConnectionState()
-    class Connected : ConnectionState()
-    class Disconnected : ConnectionState()
+    enum class ConnectionState { Initial, Connected, Disconnected }
 }
