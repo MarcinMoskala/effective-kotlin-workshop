@@ -53,7 +53,8 @@ class InMemoryUserRepositoryTest {
             launch {
                 repeat(1000) {
                     val users = repo.getUsers()
-                    assertTrue(users.count() > 1000)
+                    // The expected problem here is ConcurrentModificationException from inside count or sumOf
+                    assertTrue(users.count() >= 1000, "Problem with $users, size ${users.size}")
                     assertTrue(users.sumOf { it.id } > 500_000)
                 }
             }
@@ -70,7 +71,7 @@ class InMemoryUserRepositoryTest {
         }
         launch {
             repeat(1000) {
-                assertEquals(1, repo.getUsers().distinct().size)
+                assertEquals(1, repo.getUsers().distinctBy { it.surname }.size)
             }
         }
     }
