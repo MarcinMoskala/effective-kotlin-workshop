@@ -1,4 +1,4 @@
-package cheap
+package collections
 
 import java.io.File
 import kotlin.system.measureTimeMillis
