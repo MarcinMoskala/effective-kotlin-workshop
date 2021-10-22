@@ -9,11 +9,9 @@ val yamlReader = YamlReader()
 class PrimeAccessListRepository {
     private val accessList: PrimeAccessList = yamlReader.readYaml(file)
 
-    fun isOnAllowList(userId: Long): Boolean =
-        accessList.entries.find { it.userId == userId }?.allowList ?: false
+    fun isOnAllowList(userId: Long): Boolean = TODO()
 
-    fun isOnDenyList(userId: Long): Boolean =
-        accessList.entries.find { it.userId == userId }?.denyList ?: false
+    fun isOnDenyList(userId: Long): Boolean = TODO()
 }
 
 class PrimeAccessList(
