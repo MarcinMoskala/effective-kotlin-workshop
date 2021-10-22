@@ -1,6 +1,7 @@
 package safe
 
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import org.junit.jupiter.api.BeforeEach
@@ -25,6 +26,37 @@ class InMemoryUserRepositoryTest {
     @Test
     fun `getUsers should not expose mutation point`() {
         assertEquals(typeOf<Set<User>>(), InMemoryUserRepository::getUsers.returnType)
+    }
+
+    @Test
+    fun `should allow concurrent user addition`(): Unit = runBlocking(Dispatchers.IO) {
+        val newUsers = List(1000) { User(it * 2, "NewName$it", "NewSurname$it") }
+
+        coroutineScope {
+            for (newUser in newUsers) {
+                launch {
+                    repo.addUser(newUser)
+                }
+            }
+        }
+
+        assertEquals(2000, repo.getUsers().size)
+    }
+
+    @Test
+    fun `should allow concurrent username change`(): Unit = runBlocking(Dispatchers.IO) {
+        val users = repo.getUsers()
+
+        coroutineScope {
+            for (user in users) {
+                launch {
+                    repo.changeSurname(user.id, "NewSurname")
+                }
+            }
+        }
+
+        assertEquals(1000, repo.getUsers().size)
+        assertEquals(List(1000) { "NewSurname" }, repo.getUsers().map { it.surname })
     }
 
     @Test
