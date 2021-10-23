@@ -15,9 +15,9 @@ class EventListenerRepositoryTest {
         var b = 0
         var c = 0
 
-        eventListenerRepository.addEventListener(A, { a++ })
-        eventListenerRepository.addEventListener(B, { b++ })
-        eventListenerRepository.addEventListener(C, { c++ })
+        eventListenerRepository.addEventListener(A) { a++ }
+        eventListenerRepository.addEventListener(B) { b++ }
+        eventListenerRepository.addEventListener(C) { c++ }
 
         assertEquals(0, a)
         assertEquals(0, b)
@@ -52,9 +52,9 @@ class EventListenerRepositoryTest {
         var b = 0
         var c = 0
 
-        eventListenerRepository.addEventListener(A, { a++ })
-        eventListenerRepository.addEventListener(A, { b++ })
-        eventListenerRepository.addEventListener(A, { c++ })
+        eventListenerRepository.addEventListener(A) { a++ }
+        eventListenerRepository.addEventListener(A) { b++ }
+        eventListenerRepository.addEventListener(A) { c++ }
 
         eventListenerRepository.invokeListeners(A)
 
@@ -68,7 +68,7 @@ class EventListenerRepositoryTest {
         val eventListenerRepository = EventListenerRepository()
         var a = 0
 
-        val listener = eventListenerRepository.addEventListener(A, { a++ })
+        val listener = eventListenerRepository.addEventListener(A) { a++ }
         listener.cancel()
 
         eventListenerRepository.invokeListeners(A)

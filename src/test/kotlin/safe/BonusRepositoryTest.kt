@@ -8,13 +8,13 @@ import kotlin.test.assertEquals
 import kotlin.test.assertNotEquals
 
 class BonusRepositoryTest {
-    val user1 = User(0, "Moskała", "Marcin")
-    val user1withSurnameChanged = User(0, "Aaron", "Marcin")
-    val bonus1 = "Bonus1"
-    val bonus2 = "Bonus2"
+    private val user1 = User(0, "Moskała", "Marcin")
+    private val user1withSurnameChanged = User(0, "Aaron", "Marcin")
+    private val bonus1 = "Bonus1"
+    private val bonus2 = "Bonus2"
 
     @Test
-    fun `When user added, it can be found with contains`() {
+    fun `When user is added, it can be found with contains`() {
         val user1 = user1.copy()
         val repo = BonusRepository()
         assert(user1 !in repo)

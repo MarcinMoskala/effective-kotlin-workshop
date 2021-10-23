@@ -3,14 +3,11 @@ package safe
 import safe.BonusRepository.User
 
 // This repo is incomplete and full of errors. Improve it
-data class BonusRepository(
-    private val users: MutableSet<User> = mutableSetOf(),
-    private val bonuses: MutableMap<User, MutableList<String>> = mutableMapOf(),
+class BonusRepository(
     private val bonusesService: BonusesService = PrintingBonusesService
 ) {
-
-    operator fun get(id: Int): User =
-        users.first { it.id == id }
+    private val users: MutableSet<User> = mutableSetOf()
+    private val bonuses: MutableMap<User, MutableList<String>> = mutableMapOf()
 
     fun addUser(user: User) {
         users += user
