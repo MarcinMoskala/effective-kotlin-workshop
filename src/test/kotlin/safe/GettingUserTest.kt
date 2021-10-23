@@ -1,8 +1,9 @@
 package safe
 
-import creation.User
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
+import safe.InMemoryUserRepository.User
+import java.lang.IllegalArgumentException
 import java.lang.reflect.InvocationTargetException
 import kotlin.reflect.full.memberFunctions
 import kotlin.reflect.typeOf
@@ -12,15 +13,15 @@ class GettingUserTest {
 
     @Test
     fun `changeUserSurname when user cannot be found, proper error is displayed`() {
-        val repo = BonusRepository()
-        val exception = assertThrows<IllegalAccessException> { repo.changeUserSurname(123, "XXX") }
+        val repo = InMemoryUserRepository()
+        val exception = assertThrows<IllegalArgumentException> { repo.changeSurname(123, "XXX") }
         assertEquals("No such user in the repository", exception.message, "Function has correct message")
     }
 
     @ExperimentalStdlibApi
     @Test
     fun `getById has correct signature`() {
-        val repoClass = BonusRepository::class
+        val repoClass = InMemoryUserRepository::class
         val method = repoClass.memberFunctions.singleOrNull { it.name == "getById" }
         assertNotNull(method, "Method getById needs to be implemented")
 
@@ -30,20 +31,20 @@ class GettingUserTest {
         // Check parameter
         assertTrue(method.parameters.size == 2, "There is only a single expected argument (+ dispatch receiver)")
         // The first parameter is dispatch receiver - reference to the class
-        assertEquals(typeOf<BonusRepository>(), method.parameters[0].type, "Parameter type should be Int")
+        assertEquals(typeOf<InMemoryUserRepository>(), method.parameters[0].type, "Parameter type should be Int")
         assertEquals(typeOf<Int>(), method.parameters[1].type, "Parameter type should be Int")
         assertTrue(method.typeParameters.isEmpty(), "There should be no type parameters")
     }
 
     @Test
     fun `getById works correctly`() {
-        val repo = BonusRepository()
+        val repo = InMemoryUserRepository()
         val repoClass = repo::class
         val method = repoClass.memberFunctions.singleOrNull { it.name == "getById" }
         assertNotNull(method, "Method getById needs to be implemented")
 
         // Works for correct user
-        val user = BonusRepository.User(10, "A", "B")
+        val user = User(10, "A", "B")
         repo.addUser(user)
         assertEquals(user, method.call(repo, user.id))
 
@@ -58,7 +59,7 @@ class GettingUserTest {
     @ExperimentalStdlibApi
     @Test
     fun `getByIdOrNull has correct signature`() {
-        val repoClass = BonusRepository::class
+        val repoClass = InMemoryUserRepository::class
         val method = repoClass.memberFunctions.singleOrNull { it.name == "getByIdOrNull" }
         assertNotNull(method, "Method getByIdOrNull needs to be implemented")
 
@@ -68,20 +69,20 @@ class GettingUserTest {
         // Check parameter
         assertTrue(method.parameters.size == 2, "There is only a single expected argument (+ dispatch receiver)")
         // The first parameter is dispatch receiver - reference to the class
-        assertEquals(typeOf<BonusRepository>(), method.parameters[0].type, "Parameter type should be Int")
+        assertEquals(typeOf<InMemoryUserRepository>(), method.parameters[0].type, "Parameter type should be Int")
         assertEquals(typeOf<Int>(), method.parameters[1].type, "Parameter type should be Int")
         assertTrue(method.typeParameters.isEmpty(), "There should be no type parameters")
     }
 
     @Test
     fun `getByIdOrNull works correctly`() {
-        val repo = BonusRepository()
+        val repo = InMemoryUserRepository()
         val repoClass = repo::class
         val method = repoClass.memberFunctions.singleOrNull { it.name == "getByIdOrNull" }
         assertNotNull(method, "Method getByIdOrNull needs to be implemented")
 
         // Works for correct user
-        val user = BonusRepository.User(10, "A", "B")
+        val user = User(10, "A", "B")
         repo.addUser(user)
         assertEquals(user, method.call(repo, user.id))
 
@@ -93,7 +94,7 @@ class GettingUserTest {
     @ExperimentalStdlibApi
     @Test
     fun `getByIdOrDefault has correct signature`() {
-        val repoClass = BonusRepository::class
+        val repoClass = InMemoryUserRepository::class
         val method = repoClass.memberFunctions.singleOrNull { it.name == "getByIdOrDefault" }
         assertNotNull(method, "Method getByIdOrDefault needs to be implemented")
 
@@ -103,7 +104,7 @@ class GettingUserTest {
         // Check parameter
         assertTrue(method.parameters.size == 3, "There are two parameters in this function (+ dispatch receiver)")
         val (dispatchReceiver, param1, param2) = method.parameters
-        assertEquals(typeOf<BonusRepository>(), dispatchReceiver.type)
+        assertEquals(typeOf<InMemoryUserRepository>(), dispatchReceiver.type)
         assertEquals(typeOf<Int>(), param1.type, "The type of the first parameter should be Int")
         assertEquals(typeOf<User>(), param2.type, "The type of the second parameter should be User")
         assertTrue(method.typeParameters.isEmpty(), "There should be no type parameters")
@@ -111,14 +112,14 @@ class GettingUserTest {
 
     @Test
     fun `getByIdOrDefault works correctly`() {
-        val repo = BonusRepository()
+        val repo = InMemoryUserRepository()
         val repoClass = repo::class
         val method = repoClass.memberFunctions.singleOrNull { it.name == "getByIdOrDefault" }
         assertNotNull(method, "Method getByIdOrDefault needs to be implemented")
         val default = User(100, "C", "D")
 
         // Works for correct user
-        val user = BonusRepository.User(10, "A", "B")
+        val user = User(10, "A", "B")
         repo.addUser(user)
         assertEquals(user, method.call(repo, user.id, default))
 
