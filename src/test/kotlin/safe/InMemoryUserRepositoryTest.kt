@@ -94,7 +94,7 @@ class InMemoryUserRepositoryTest {
     }
 
     @Test
-    fun `When we set new surnames, they should all be the same`(): Unit = runBlocking {
+    fun `When we set new surnames, they should all be the same`(): Unit = runBlocking(Dispatchers.IO) {
         repo.changeAllSurnames("NewSurname")
         launch {
             repeat(1000) {
