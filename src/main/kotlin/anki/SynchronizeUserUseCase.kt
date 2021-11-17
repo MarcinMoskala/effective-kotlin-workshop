@@ -14,7 +14,7 @@ class SynchronizeUserUseCase(
             }
         } catch (e: AnkiApiException) {
             val dialog = AnkiDialog(
-                title = "Cards synchronization exception",
+                title = "User synchronization exception",
                 text = e.message,
                 okButton = AnkiDialog.Button("OK")
             )
@@ -24,7 +24,7 @@ class SynchronizeUserUseCase(
 
         val dialog = AnkiDialog(
             title = "Success",
-            text = "Cards correction successful",
+            text = "User correction successful",
             okButton = AnkiDialog.Button("OK"),
         )
         view.show(dialog)
