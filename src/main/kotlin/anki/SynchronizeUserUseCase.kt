@@ -19,6 +19,7 @@ class SynchronizeUserUseCase(
                 okButton = AnkiDialog.Button("OK")
             )
             view.show(dialog)
+            return
         }
 
         val dialog = AnkiDialog(
