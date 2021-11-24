@@ -24,7 +24,7 @@ class SynchronizeUserUseCase(
 
         val dialog = AnkiDialog(
             title = "Success",
-            text = "User correction successful",
+            text = "User synchronization successful",
             okButton = AnkiDialog.Button("OK"),
         )
         view.show(dialog)
