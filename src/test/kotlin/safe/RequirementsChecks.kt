@@ -30,14 +30,14 @@ class RequirementsChecks {
     fun `Function throws IllegalArgumentException when name is null`() {
         val notifier = FakeNotifier(initialized = true)
         val id = 123
-        assertThrows<IllegalArgumentException> { notifier.notifyUser(User(id, "Barack", null)) }
+        assertThrows<IllegalArgumentException> { notifier.notifyUser(User(id, null, "Kowalski")) }
     }
 
     @Test
     fun `Function throws IllegalArgumentException when surname is null`() {
         val notifier = FakeNotifier(initialized = true)
         val id = 123
-        assertThrows<IllegalArgumentException> { notifier.notifyUser(User(id, null, "Kowalski")) }
+        assertThrows<IllegalArgumentException> { notifier.notifyUser(User(id, "Barack", null)) }
     }
 
     @Test
