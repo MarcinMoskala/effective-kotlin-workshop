@@ -5,7 +5,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 
-class Dog(val name: String)
+data class Dog(val name: String)
 
 var dogs = listOf<Dog>()
 

@@ -5,7 +5,13 @@ import java.lang.Error
 data class User(val id: Int, val name: String?, var surname: String?)
 
 fun Notifier.notifyUser(user: User?) {
-    TODO()
+    user ?: return
+    if (!checkId(user.id)) throw IncorrectId()
+    requireNotNull(user.name) { "User name cannot be null" }
+    requireNotNull(user.surname) { "User surname cannot be null" }
+    check(this.initialized) { "Notifier must be initialized" }
+    val success = notifyPerson(user.id)
+    assert(success)
 }
 
 class IncorrectId : Error()

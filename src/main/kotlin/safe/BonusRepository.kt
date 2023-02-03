@@ -1,45 +1,52 @@
 package safe
 
 import safe.BonusRepository.User
+import kotlin.properties.Delegates
 
 // This repo is incomplete and full of errors. Improve it
 class BonusRepository(
     private val bonusesService: BonusesService = PrintingBonusesService
 ) {
-    private val users: MutableSet<User> = mutableSetOf()
-    private val bonuses: MutableMap<User, MutableList<String>> = mutableMapOf()
-
-    fun addUser(user: User) {
-        users += user
+    private var users: Map<Int, User> = mapOf()
+    private var bonuses: Map<Int, List<String>> by Delegates.observable(mapOf()) { _, _, new ->
+        bonusesService.update(bonuses
+            .mapKeys { (id, _) -> users[id] }
+            .filter { (user, _) -> user != null } as Map<User, List<String>>
+        )
     }
 
-    operator fun contains(user: User) = user in users
+    fun addUser(user: User) {
+        users += user.id to user
+    }
+
+    operator fun contains(user: User) = user.id in users
 
     fun changeUserSurname(userId: Int, newSurname: String?) {
-        users.first { it.id == userId }.surname = newSurname
+        val user: User = users[userId] ?: return
+        users = users - userId + (userId to user.copy(surname = newSurname))
     }
 
     fun addBonus(user: User, bonus: String) {
-        // TODO
-        bonusesService.update(bonuses)
+        val prevBonuses = bonuses[user.id].orEmpty()
+        bonuses += user.id to (prevBonuses + bonus)
     }
 
     fun removeBonus(user: User, bonus: String) {
-        // TODO
-        bonusesService.update(bonuses)
+        val prevBonuses = bonuses[user.id].orEmpty()
+        bonuses += user.id to (prevBonuses - bonus)
     }
 
     fun updateBonus(user: User, oldBonus: String, newBonus: String) {
-        // TODO
-        bonusesService.update(bonuses)
+        val prevBonuses = bonuses[user.id].orEmpty()
+        bonuses += user.id to (prevBonuses - oldBonus + newBonus)
     }
 
-    fun bonusesOf(user: User) = bonuses[user]!!
+    fun bonusesOf(user: User) = bonuses[user.id].orEmpty()
 
     data class User(
-        var id: Int,
-        var surname: String?,
-        var name: String?
+        val id: Int,
+        val surname: String?,
+        val name: String?
     )
 }
 

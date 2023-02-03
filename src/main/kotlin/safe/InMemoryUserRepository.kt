@@ -1,23 +1,26 @@
 package safe
 
 class InMemoryUserRepository {
-    private val users = mutableSetOf<User>()
+    private var users = setOf<User>()
+    private val LOCK = Any()
 
-    fun addUser(user: User) {
-        users.add(user)
+    fun addUser(user: User) = synchronized(LOCK) {
+        users += user
     }
 
-    fun getUsers() = users
+    fun getUsers(): Set<User> = users
 
     fun hasUser(user: User): Boolean = user in users
 
-    fun changeSurname(userId: Int, newSurname: String) {
-        users.find { it.id == userId }?.surname = newSurname
+    fun changeSurname(userId: Int, newSurname: String) = synchronized(LOCK) {
+        val user = users.find { it.id == userId } ?: return@synchronized
+        val newUser = user.copy(surname = newSurname)
+        users = users - user + newUser
     }
 
-    fun changeAllSurnames(newSurname: String) {
-        users.forEach { it.surname = newSurname }
+    fun changeAllSurnames(newSurname: String) = synchronized(LOCK) {
+        users = users.map { it.copy(surname = newSurname) }.toSet()
     }
 
-    data class User(val id: Int, val name: String, var surname: String)
+    data class User(val id: Int, val name: String, val surname: String)
 }

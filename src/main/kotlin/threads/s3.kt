@@ -5,7 +5,7 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.runBlocking
 import java.util.concurrent.atomic.AtomicInteger
 
-private var counter = AtomicInteger()
+private val counter = AtomicInteger()
 
 fun main() = runBlocking {
     massiveRun {

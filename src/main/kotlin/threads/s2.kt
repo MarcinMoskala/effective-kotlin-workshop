@@ -2,6 +2,7 @@ package examples.n1
 
 import examples.massiveRun
 import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
 import java.util.concurrent.atomic.AtomicInteger
 

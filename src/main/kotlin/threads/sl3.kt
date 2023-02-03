@@ -12,7 +12,8 @@ import java.util.concurrent.CopyOnWriteArrayList
 fun main() = runBlocking {
     val dogs = ConcurrentLinkedQueue<Dog>()
     massiveRun {
-        dogs += Dog("Reks")
+        dogs += Dog("A")
+        dogs += Dog("B")
     }
-    println("Counter = ${dogs.size}")
+    println("Counter = ${dogs}")
 }

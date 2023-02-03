@@ -32,17 +32,12 @@ class DeckConnectorTest {
         assertTrue(deck1.hashCode() != deck2.hashCode())
         assertTrue(deckConnected1.hashCode() == deckConnected1copy.hashCode())
         assertTrue(deckConnected1.hashCode() != deckConnected2.hashCode())
-
-//        assertEquals(2001856, deck1.hashCode())
-//        assertEquals(2032639, deck2.hashCode())
-//        assertEquals(2001857, deckConnected1.hashCode())
-//        assertEquals(2032640, deckConnected2.hashCode())
     }
 
-//    @Test
-//    fun comparisonTest() {
-//        val decks = listOf(deck2, deckConnected2, deck1, deckConnected1)
-//        val decksInOrder = listOf(deck1, deckConnected1, deck2, deckConnected2)
-//        assertEquals(decksInOrder, decks.sorted())
-//    }
+    @Test
+    fun comparisonTest() {
+        val decks = listOf(deck2, deckConnected2, deck1, deckConnected1)
+        val decksInOrder = listOf(deck1, deckConnected1, deck2, deckConnected2)
+        assertEquals(decksInOrder, decks.sorted())
+    }
 }
