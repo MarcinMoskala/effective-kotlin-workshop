@@ -1,3 +1,5 @@
+@file:JvmName("KotlinTopLevel")
+
 package javatask
 
 fun topLevelFunction() {
