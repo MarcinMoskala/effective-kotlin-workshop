@@ -40,6 +40,6 @@ fun main() {
         )
     )
     println(creature.toJson())
-    // {attack: 2, cost: {ANY: 3, FOREST: 2}, defence: 4,
-    // name: "Cockatrice", traits: [FLYING]}
+    // {"attack": 2, "cost": {"ANY": 3, "FOREST": 2}, "defence": 4,
+    // "name": "Cockatrice", "traits": ["FLYING"]}
 }
