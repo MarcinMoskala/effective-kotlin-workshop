@@ -1,7 +1,7 @@
-import kotlin.reflect.KClass
+package reflection
+
 import kotlin.reflect.KFunction
 import kotlin.reflect.KType
-import kotlin.reflect.full.starProjectedType
 import kotlin.reflect.typeOf
 
 class FunctionCaller {
