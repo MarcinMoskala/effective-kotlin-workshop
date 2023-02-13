@@ -8,15 +8,18 @@ class SerializerTest {
 
     @Test
     fun `should serialize numbers`() {
-        class ExampleClass(val a: Int, val b: Int, val c: Int)
-        assertEquals(
-            "{\"a\": 1, \"b\": 2, \"c\": 3}",
-            ExampleClass(1, 2, 3).toJson()
-        )
+        assertEquals("10", 10.toJson())
+        assertEquals("123", 123.toJson())
     }
 
     @Test
     fun `should serialize string`() {
+        assertEquals("\"ABC\"", "ABC".toJson())
+        assertEquals("\"A B C\"", "A B C".toJson())
+    }
+
+    @Test
+    fun `should serialize object with string`() {
         class ExampleClass(val s1: String, val s2: String)
         assertEquals(
             "{\"s1\": \"ABC\", \"s2\": \"DEF\"}",
